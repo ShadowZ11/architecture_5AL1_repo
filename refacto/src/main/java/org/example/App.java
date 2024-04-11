@@ -1,22 +1,11 @@
 package org.example;
 
-public class App {
-    private static final String SMALL = "petit";
-    private static final String MEDIUM = "moyen";
-    private static final String LARGE = "grand";
-    private static final String NORMAL = "normal";
-    private static final String SPECIAL = "special";
-    private static final String DISH = "assiette";
-    private static final String YES = "yes";
+import org.example.products.SizeEnum;
 
-    private static final int SMALL_PRICE = 2;
-    private static final int MEDIUM_PRICE = 3;
-    private static final int LARGE_PRICE = 4;
-    private static final int NORMAL_DESSERT_PRICE = 2;
-    private static final int SPECIAL_DESSERT_PRICE = 4;
-    private static final int COFFEE_PRICE = 1;
-    private static final int DISH_PRICE = 15;
-    private static final int SANDWICH_PRICE = 10;
+import static org.example.products.PriceEnum.*;
+import static org.example.products.SizeEnum.*;
+
+public class App {
 
     public int Compute(String mealType, String mealName, String beverage, String beverageSize, String dessertType, String dessertSize, String coffee) {
         if (isInvalid(mealType, mealName, beverage)) {
@@ -36,36 +25,36 @@ public class App {
     }
 
     private int calculateMealPrice(String mealType) {
-        return mealType.equals(DISH) ? DISH_PRICE : SANDWICH_PRICE;
+        return mealType.equals(DISH.getSize()) ? DISH_PRICE.getPrice() : SANDWICH_PRICE.getPrice();
     }
 
     private int calculateBeveragePrice(String beverageSize) {
-        return switch (beverageSize) {
-            case SMALL -> SMALL_PRICE;
-            case MEDIUM -> MEDIUM_PRICE;
-            case LARGE -> LARGE_PRICE;
+        return switch (SizeEnum.fromSize(beverageSize)) {
+            case SMALL -> SMALL_PRICE.getPrice();
+            case MEDIUM -> MEDIUM_PRICE.getPrice();
+            case LARGE -> LARGE_PRICE.getPrice();
             default -> 0;
         };
     }
 
     private int calculateDessertPrice(String dessertType) {
-        if (dessertType.equals(NORMAL)) {
-            return NORMAL_DESSERT_PRICE;
+        if (dessertType.equals(NORMAL.getSize())) {
+            return NORMAL_DESSERT_PRICE.getPrice();
         }
-        if (dessertType.equals(SPECIAL)) {
-            return SPECIAL_DESSERT_PRICE;
+        if (dessertType.equals(SPECIAL.getSize())) {
+            return SPECIAL_DESSERT_PRICE.getPrice();
         }
         return 0;
     }
 
     private int calculateCoffeePrice(String coffee, String mealType, String dessertSize, String beverageSize) {
-        if (coffee.equals(YES) &&
-                mealType.equals(DISH) &&
-                beverageSize.equals(MEDIUM) &&
-                dessertSize.equals(NORMAL)) {
+        if (coffee.equals(YES.getSize()) &&
+                mealType.equals(DISH.getSize()) &&
+                beverageSize.equals(MEDIUM.getSize()) &&
+                dessertSize.equals(NORMAL.getSize())) {
             return 0;
         }
-        return COFFEE_PRICE;
+        return COFFEE_PRICE.getPrice();
     }
 
 }

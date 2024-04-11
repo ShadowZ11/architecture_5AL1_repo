@@ -16,7 +16,17 @@ public enum PriceEnum {
         this.price = price;
     }
 
-    int getPrice() {
+    public int getPrice() {
         return price;
     }
+
+    public static PriceEnum fromPrice(int price) {
+        for (PriceEnum priceEnum: values()) {
+            if (priceEnum.getPrice() == price) {
+                return priceEnum;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant org.example.products.SizeEnum." + price);
+    }
+
 }

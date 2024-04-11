@@ -18,4 +18,14 @@ public enum SizeEnum {
     public String getSize() {
         return size;
     }
+
+    public static SizeEnum fromSize(String size) {
+        for (SizeEnum sizeEnum: values()) {
+            if (sizeEnum.getSize().equals(size)) {
+                return sizeEnum;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant org.example.products.SizeEnum." + size);
+    }
+
 }
