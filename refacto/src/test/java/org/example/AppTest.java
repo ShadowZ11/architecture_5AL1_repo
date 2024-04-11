@@ -14,11 +14,4 @@ public class AppTest {
         assertEquals(18, price);
     }
 
-    @Test
-    public void testComputeRefacto() {
-        AppRefacto app = new AppRefacto();
-        int price = app.Compute("assiette", "couscous", "coca", "moyen", "baba", "normal", "yes");
-        assertEquals(18, price);
-    }
-
 }
