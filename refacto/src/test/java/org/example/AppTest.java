@@ -14,4 +14,12 @@ public class AppTest {
         assertEquals(18, price);
     }
 
+    @Test
+    public void testComputeNotOkay() {
+        App app = new App();
+        int price = app.Compute("assiette", "couscous", "coca", "moyen", "baba", "normal", "yes");
+        assertNotEquals(12, price);
+    }
+
+
 }
